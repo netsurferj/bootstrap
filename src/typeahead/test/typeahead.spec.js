@@ -824,6 +824,17 @@ describe('typeahead tests', function() {
 
   describe('non-regressions tests', function() {
 
+    it('feat 5707 - keeps matches popup open on click outside typeahead when close-on-blur is false', function() {
+      var element = prepareInputEl('<div><input ng-model="result" uib-typeahead="item for item in source | filter:$viewValue" typeahead-close-on-blur="false"></div>');
+
+      changeInputValueTo(element, 'b');
+
+      $document.find('body').click();
+      $scope.$digest();
+
+      expect(element).not.toBeClosed();
+    });
+
     it('issue 231 - closes matches popup on click outside typeahead', function() {
       var element = prepareInputEl('<div><input ng-model="result" uib-typeahead="item for item in source | filter:$viewValue"></div>');
 
