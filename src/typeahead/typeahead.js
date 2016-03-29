@@ -61,6 +61,9 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
     //should it select highlighted popup value when losing focus?
     var isSelectOnBlur = angular.isDefined(attrs.typeaheadSelectOnBlur) ? originalScope.$eval(attrs.typeaheadSelectOnBlur) : false;
 
+    //should it select highlighted popup value when losing focus?
+    var isCloseOnBlur = angular.isDefined(attrs.typeaheadCloseOnBlur) ? originalScope.$eval(attrs.typeaheadCloseOnBlur) : true;
+
     //binding to a variable that indicates if there were no results after the query is completed
     var isNoResultsSetter = $parse(attrs.typeaheadNoResults).assign || angular.noop;
 
@@ -455,7 +458,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
     var dismissClickHandler = function(evt) {
       // Issue #3973
       // Firefox treats right click as a click on document
-      if (element[0] !== evt.target && evt.which !== 3 && scope.matches.length !== 0) {
+      if (isCloseOnBlur && element[0] !== evt.target && evt.which !== 3 && scope.matches.length !== 0) {
         resetMatches();
         if (!$rootScope.$$phase) {
           originalScope.$digest();
