@@ -91,6 +91,11 @@ This directive works with promises, meaning you can retrieve matches using the `
   _(Default: `false`)_ -
   On blur, select the currently highlighted match.
 
+* `typeahead-close-on-blur`
+  <small class="badge">$</small>
+  _(Default: `true`)_ -
+  When clicking away from editor, close results popup.
+
 * `typeahead-select-on-exact`
   <small class="badge">$</small>
   _(Default: `false`)_ -
